@@ -2,8 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OOPAssignment.Class
 {
@@ -11,14 +9,21 @@ namespace OOPAssignment.Class
     {
         private long _width;
         private long _height;
-
         public long Width => _width;
-
         public long Height => _height;
+        private readonly List<CarInfo> ObservableCars;
+
+        public Surface(long width, long height)
+        {
+            _width = width;
+            _height = height;
+
+            ObservableCars = new List<CarInfo>();
+        }
 
         public List<CarInfo> GetObservables()
         {
-            throw new NotImplementedException();
+            return new List<CarInfo>(ObservableCars);
         }
 
         public bool IsCoordinatesEmpty(Coordinates coordinates)
@@ -28,21 +33,21 @@ namespace OOPAssignment.Class
 
         public bool IsCoordinatesInBounds(Coordinates coordinates)
         {
-            throw new NotImplementedException();
+            if (coordinates.Y > Height || coordinates.Y < 0
+                || coordinates.X > Width || coordinates.X < 0)
+                return false;
+
+            return true;
         }
+
 
         public void Update(CarInfo provider)
         {
-            throw new NotImplementedException();
+            var car = ObservableCars.FirstOrDefault(x => x.CarId == provider.CarId);
+            if (car != null)
+                car = provider;
+            else
+                ObservableCars.Add(provider);
         }
-
-        private List<CarInfo> ObservableCars { get; }
-
-        public Surface(long width, long height)
-        {
-            _width = width;
-            _height = height;
-        }
-
     }
 }

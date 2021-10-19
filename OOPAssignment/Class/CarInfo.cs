@@ -8,8 +8,8 @@ namespace OOPAssignment.Class
 {
     public class CarInfo
     {
-        Guid CarId;
-        Coordinates Coordinates;
+        public Guid CarId;
+        public Coordinates Coordinates;
         public CarInfo(Guid carId, Coordinates coordinates)
         {
             CarId = carId;
